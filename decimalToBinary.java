@@ -5,9 +5,9 @@ public class decimalToBinary {
 
     }
 
-    public static String decToBin0(int dec) {
+    public static int decToBin0(int dec) {
         if (dec == 0)
-            return "0";
+            return 0;
 
         StringBuilder binary = new StringBuilder();
 
@@ -17,6 +17,6 @@ public class decimalToBinary {
             dec /= 2;
         }
 
-        return binary.reverse().toString();
+        return Integer.parseInt(binary.reverse().toString());
     }
 }

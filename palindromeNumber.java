@@ -1,7 +1,7 @@
 public class palindromeNumber {
     public static void main(String[] args) {
         int n = 12321;
-        System.out.println(isPalin0(n));
+        System.out.println(isPalin1(n));
     }
 
     public static boolean isPalin0(int n) {
@@ -22,5 +22,22 @@ public class palindromeNumber {
         }
 
         return reversedNum;
+    }
+
+    public static boolean isPalin1(int n) { // T.C -> O(N) S.C -> O(N)
+        String str = String.valueOf(n);
+        int i = 0;
+        int j = str.length() - 1;
+
+        while (i < j) {
+            if (str.charAt(i) != str.charAt(j)) {
+                return false;
+            }
+
+            i++;
+            j--;
+        }
+
+        return true;
     }
 }
