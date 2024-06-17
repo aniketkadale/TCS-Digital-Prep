@@ -1,0 +1,157 @@
+-- 11 June
+CREATE TABLE CUSTOMERS (
+	CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(20) NOT NULL,
+    Address VARCHAR(20) NOT NULL,
+    City VARCHAR(10) NOT NULL,
+    PostalCode INT NOT NULL,
+    Country VARCHAR(20) NOT NULL
+)
+
+SELECT * FROM CUSTOMERS;
+-- inserting single row
+INSERT INTO CUSTOMERS VALUES(1, 'Sara Tendulkar', 'Near BOM', 'Mumbai', 456712, 'India');
+INSERT INTO CUSTOMERS VALUES(2, 'Aniket Kadale', 'Kale Colony', 'Pune', 412408, 'India');
+INSERT INTO CUSTOMERS VALUES(3, 'Alice', 'Street 7', 'New York', 658766, 'USA');
+INSERT INTO CUSTOMERS VALUES(4, 'Mille Bobby Brown', 'Jane Street', 'London', 623425, 'England');
+INSERT INTO CUSTOMERS VALUES(5, 'Alia Bhatt', 'Shree Complex', 'Mumbai', 568741, 'India');
+
+SELECT * FROM CUSTOMERS ORDER BY CUSTOMERID ASC;
+
+-- using DISTINCT keyword
+SELECT DISTINCT Country FROM CUSTOMERS
+
+-- WHERE clause (you can use operator with where clause such as <=, >=, <>, Between, Like, In)
+SELECT * FROM CUSTOMERS WHERE country = 'India'
+
+
+--ORDER BY- used to sort the result asceding or descending
+SELECT * FROM CUSTOMERS ORDER BY ADDRESS;
+
+-- AND operator --> retrive data based on more than one condition
+SELECT * FROM CUSTOMERS WHERE City = 'Mumbai' AND Country = 'India';
+
+-- OR operator --> retrive data based on more than one condition either of 2 will be true
+SELECT * FROM CUSTOMERS WHERE City = 'Mumbai' OR City = 'Pune';
+
+-- NOT operator -> used to give negative result
+SELECT * FROM CUSTOMERS WHERE NOT Country = 'India'
+
+-- IS NULL, IS NOT NULL
+SELECT * FROM CUSTOMERS WHERE ADDRESS IS NOT NULL;
+SELECT * FROM CUSTOMERS WHERE ADDRESS IS NULL;
+
+--UPDATE
+UPDATE CUSTOMERS
+SET City = 'Banglore'
+WHERE CustomerID = 2
+
+--DELETE
+DELETE FROM CUSTOMERS
+WHERE City = 'New York'
+
+SELECT * FROM CUSTOMERS
+
+
+-- SELECT TOP -> Return the top N records
+SELECT * FROM CUSTOMERS LIMIT 3;
+
+-- Aggregate Functions
+-- MIN
+SELECT MIN(PostalCode) FROM CUSTOMERS
+
+-- MAX
+SELECT MAX(PostalCode) FROM CUSTOMERS
+
+
+-- Count
+SELECT COUNT(CustomerID) FROM Customers
+
+---AVG
+SELECT AVG(CustomerID) FROM CUSTOMERS;
+
+--SUM
+SELECT SUM(CustomerID) FROM CUSTOMERS;
+
+-- LIKE operator -> used to search specified pattern in a column. Two wildcards are used 1. % and _. % represents zero, one or more characters whereas _ represents a single character.
+-- A% -> starts with A,     %A -> ends with A
+SELECT * FROM CUSTOMERS
+WHERE CustomerName LIKE 'A%e' 
+-- finding customername starting with 'A' and ending with 'e'
+
+
+
+
+
+-- 12 June -- JOINS
+CREATE TABLE EMPLOYEE (
+    EMP_ID INT NOT NULL,
+    EMP_NAME VARCHAR(20) NOT NULL,
+    DEPT_ID INT,
+    PRIMARY KEY (EMP_ID),
+    FOREIGN KEY (DEPT_ID) REFERENCES DEPARTMENTS(DEPT_ID)
+);
+
+
+SELECT * FROM EMPLOYEE
+INSERT INTO EMPLOYEE (EMP_ID, EMP_NAME, DEPT_ID) VALUES (1, 'JOHN', 10), (2, 'ALICE', 20), (3, 'BOB', NULL), (4, 'CHARLIE', 30), (5, 'DAVID', 10)
+
+CREATE TABLE DEPARTMENTS (
+    DEPT_ID INT NOT NULL PRIMARY KEY,
+    DEPT_NAME VARCHAR(20) NOT NULL
+);
+
+
+SELECT * FROM DEPARTMENTS
+
+INSERT INTO DEPARTMENTS (DEPT_ID, DEPT_NAME) VALUES (10, 'HR'), (20, 'IT'), (30, 'SALES'), (40, 'MARKETING')
+
+INNER JOIN
+SELECT EMP_NAME, DEPT_NAME 
+FROM EMPLOYEE
+INNER JOIN DEPARTMENTS ON EMPLOYEE.DEPT_ID = DEPARTMENTS.DEPT_ID
+
+Output:
+
+
+LEFT JOIN
+SELECT EMP_NAME, DEPT_NAME 
+FROM EMPLOYEE
+LEFT JOIN DEPARTMENTS ON EMPLOYEE.DEPT_ID = DEPARTMENTS.DEPT_ID
+
+
+Output:
+
+
+
+
+RIGHT JOIN
+SELECT EMP_NAME, DEPT_NAME 
+FROM EMPLOYEE
+RIGHT JOIN DEPARTMENTS ON EMPLOYEE.DEPT_ID = DEPARTMENTS.DEPT_ID
+
+
+Output:
+
+
+
+CROSS JOIN
+SELECT EMP_NAME, DEPT_NAME 
+FROM EMPLOYEE
+CROSS JOIN DEPARTMENTS 
+
+Output:
+
+
+
+FULL OUTER JOIN
+SELECT EMP_NAME, DEPT_NAME 
+FROM EMPLOYEE
+FULL OUTER JOIN DEPARTMENTS ON EMPLOYEE.DEPT_ID = DEPARTMENTS.DEPT_ID
+
+
+Output:
+
+
+
+
